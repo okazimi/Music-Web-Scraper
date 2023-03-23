@@ -1,0 +1,54 @@
+ /* INDEX.HTML HEADER */
+.header {
+    text-align: center;
+    font-family: "Comfortaa", serif;
+    padding: 75px 0px 75px 0px;
+}
+
+
+ /* APPLE EMBEDDED MUSIC PLAYER CSS */
+#apple_embed_player {
+    text-align: center;
+}
+
+
+ /* SONG DATA CSS */
+.song_image {
+    text-align: right;
+    padding: 20px 20px 0px 0px;
+    position: relative;
+}
+
+.play_button {
+    position: absolute;
+    top: 85px;
+    right: 85px;
+}
+
+.audio-playing {
+    position: absolute;
+    top: 80px;
+    right: 80px;
+}
+
+.song_text {
+    font-family: "Comfortaa", serif;
+    padding: 70px 0px 0px 0px
+}
+
+
+ /* FOOTER CSS */
+.footer-basic {
+    padding: 50px 0px 20px 0px;
+    text-align: center;
+    font-family: "Comfortaa", serif;
+}
+
+#OKMusicLogo {
+    border-radius: 50%;
+    border: 5px solid #000000;
+    height: 150px;
+    width: 150px;
+    margin-bottom: 15px;
+    padding-top: 10px;
+}

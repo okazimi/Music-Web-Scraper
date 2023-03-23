@@ -1,0 +1,78 @@
+<!-- IMPORT BOOTSTRAP -->
+{% extends "bootstrap/base.html" %}
+
+{% block styles %}
+{{super()}}
+  <!-- CSS/GOOGLE FONTS/FONT AWESOME IMPORTS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/76bec3ae94.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+<!-- HTML PAGE TITLE -->
+{% block title %}Today's Hits on OKMusic{% endblock %}
+
+<!-- HTML BODY -->
+{% block content %}
+
+  <!-- HEADER -->
+    <div>
+      <h1 class="header">
+        Today's Hits
+      </h1>
+    </div>
+
+  <!-- TOP SONGS -->
+  <!-- APPLE EMBED METHOD -->
+  <!-- <div id="apple_embed_player">
+    <iframe id="embedPlayer" src="https://embed.music.apple.com/us/playlist/todays-hits/pl.f4d106fed2bd41149aaacabb233eb5eb?app=music&amp;itsct=music_box_player&amp;itscg=30200&amp;ls=1&amp;theme=auto" height="450px" frameborder="0" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="autoplay *; encrypted-media *; clipboard-write" style="width: 100%; max-width: 660px; overflow: hidden; border-radius: 10px; transform: translateZ(0px); animation: 2s ease 0s 6 normal none running loading-indicator; background-color: rgb(228, 228, 228);"></iframe>
+  </div> -->
+
+ <!-- TOP SONGS -->
+ <!-- WEB SCRAPING METHOD -->
+  <div>
+    <!-- JINJA: INCREMENTING FOR LOOP WITH LENGTH OF DESIRED SONG RESULTS -->
+    {% for i in range(0, 5) %}
+      <!-- JINJA: ASSIGN INDEX TO EACH SONG -->
+      {% set song_index = i %}
+      <!-- JINJA: USER'S REQUEST SONG TO PLAY == SONG INDEX -->
+      {% if target_song == song_index %}
+        <!-- JINJA: SET STATES -->
+        {% set audio_display_state = "block" %}
+        {% set play_button_state = "none" %}
+      <!-- USER'S REQUESTED SONG TO PLAY != SONG INDEX -->
+      {% else %}
+        <!-- JINJA: SET STATES -->
+        {% set audio_display_state = "none" %}
+        {% set play_button_state = "block" %}
+      {% endif %}
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 song_image">
+              <!-- SONG IMAGE -->
+              <img style="border-radius: 15%;" src='{{ song_data["entry" + i|string]["image"] }}'>
+              <!-- AUDIO PLAYING -->
+              <img class="audio-playing" src="https://cdn.top-charts.com/static/images/player_icons/audio_play.gif" style="display:{{ audio_display_state }}">
+              <!-- PLAY BUTTON -->
+              <form action="{{ url_for('home', index=song_index) }}" method="post" style="display:{{ play_button_state }}">
+                <button type="submit" class="btn play_button"><i class="fa fa-solid fa-play"></i></button>
+              </form>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 song_text">
+              <!-- SONG NAME -->
+              <p>{{ song_data["entry" + i|string]["name"] }}</p>
+              <!-- SONG ARTIST -->
+              <p>{{ song_data["entry" + i|string]["artist"] }}</p>
+            </div>
+          </div>
+    {% endfor %}
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-basic">
+        <footer>
+            <img id="OKMusicLogo" src="static/images/OKMusicLogo.PNG">
+            <p class="copyright">OKMusic © 2023</p>
+        </footer>
+  </div>
+
+{% endblock %}
